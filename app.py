@@ -9,12 +9,24 @@ import math
 st.set_page_config(layout="wide", page_title="St. Xavier Track Reports")
 
 @st.cache_resource
+# --- THIS IS THE NEW, CORRECT CODE ---
+import os
+import sqlite3
+import streamlit as st
+
+@st.cache_resource
 def get_connection():
-    # --- FIX #1: This path is now clean and correct for your new project folder ---
-    return sqlite3.connect(
-        "C:/Users/Bob/OneDrive/StX_XC_Track/track_analytics_app/data/stx_track.db",
-        check_same_thread=False
-    )
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Join the script directory with the relative path to the database
+    db_path = os.path.join(script_dir, "data", "track_and_field.db")
+    # Connect to the database
+    return sqlite3.connect(db_path, check_same_thread=False)
+
+# Your other code follows...
+conn = get_connection()
+# ... etc
+
 
 conn = get_connection()
 
