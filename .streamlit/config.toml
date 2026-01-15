@@ -1,0 +1,4 @@
+[connections]
+
+[connections.db]
+url = "data/stx_track.db"
